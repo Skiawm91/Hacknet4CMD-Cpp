@@ -22,5 +22,5 @@ cd Hacknet-For-CMD-Cpp
 3. Build `cl Hacknet.cpp /Fe:Hacknet.exe /link advapi32.lib winmm.lib`
 ## Thanks
 * [Skiawm91](https://github.com/Skiawm91)
-* AhQiang
+* [AhQiang](https://github.com/Hoyiqiang)
 * [65536Java](https://github.com/65536Java)
