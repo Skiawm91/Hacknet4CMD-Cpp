@@ -3,6 +3,7 @@
 #include <string>
 #include <windows.h>
 #include "boot.h"
+#include "logUI.h"
 using namespace std;
 
 // Pre get "OS Name"/"OS Verion" by ChatGPT
@@ -101,4 +102,5 @@ void Boot() {
     cout << "\n\n";
     cout << "Booting complete." << endl;
     Sleep(3000);
+    LogUI();
 }

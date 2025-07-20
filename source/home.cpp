@@ -6,6 +6,7 @@
 using namespace std;
 
 int main(){
+    SetConsoleTitleA("Hacknet");
     string chse;
     PlaySound(TEXT("sounds/AmbientDroneClipped.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
     while(true) {

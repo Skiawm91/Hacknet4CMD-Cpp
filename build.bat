@@ -13,7 +13,7 @@ call "%VSPath%\Common7\Tools\VsDevCmd.bat"
 rmdir /S /Q build > nul
 mkdir build build\sounds > nul
 copy /Y sounds\*.* build\sounds > nul
-cl /Zi /EHsc /nologo /FeBuild\\Hacknet.exe /Fobuild\ source\home.cpp source\boot.cpp /link advapi32.lib winmm.lib
+cl /Zi /EHsc /nologo /FeBuild\\Hacknet.exe /Fobuild\ source\home.cpp source\boot.cpp source\logUI.cpp /link advapi32.lib winmm.lib user32.lib
 echo.
 echo Done.
 echo Press Enter to Run Application.
