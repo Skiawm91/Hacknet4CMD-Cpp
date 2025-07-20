@@ -11,7 +11,6 @@ I also hid systeminfo output.
 ## How to use?
 ### Requirements
 1. [Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/) with "Desktop development with C++"
-2. [VSCode](https://code.visualstudio.com/Download) (Optional)
 ### Step
 1. Open "Developer Command Prompt for VS 20xx"
 2. Clone repository
@@ -19,7 +18,7 @@ I also hid systeminfo output.
 git clone https://github.com/Skiawm91/Hacknet-For-CMD-Cpp.git
 cd Hacknet-For-CMD-Cpp
 ```
-3. Build `cl Hacknet.cpp /Fe:Hacknet.exe /link advapi32.lib winmm.lib`
+3. Run `build.bat`
 ## Thanks
 * [Skiawm91](https://github.com/Skiawm91)
 * [AhQiang](https://github.com/Hoyiqiang)
