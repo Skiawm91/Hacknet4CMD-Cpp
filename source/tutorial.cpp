@@ -1,6 +1,7 @@
 #include <windows.h>
 #include <iostream>
 #include <string>
+#include <limits>
 #include "tutorial.h"
 #include "cmd.h"
 #include "porthack.h"
@@ -8,6 +9,8 @@ using namespace std;
 
 void Tutorial() {
     SetConsoleTitleA("Hacknet Tutorial");
+    string yn;
+    string cmd;
     system("cls");
     Sleep(2000);
     cout << "-----正在初始化FailSafe模式-----\n" << endl;
@@ -22,7 +25,6 @@ void Tutorial() {
     PlaySound(NULL, NULL, 0);
     PlaySound(TEXT("sounds\\tutorial.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
     Sleep(1000);
-    string yn;
     while(true) {
         system("cls");
         cout << "Tutorial Mode\n"
@@ -34,7 +36,6 @@ void Tutorial() {
         cout << "choose: ";
         cin >> yn;
         if (yn=="y") {
-            string yn;
             while(true) {
                 system("cls");
                 cout << "Tutorial Mode\n"
@@ -46,7 +47,6 @@ void Tutorial() {
                 cout << "choose: ";
                 cin >> yn;
                 if (yn=="y") {
-                    string cmd;
                     system("cls");
                     cout << "正在與D3f4ult's PC建立安全連線..." << endl;
                     Sleep(2000);
@@ -126,11 +126,11 @@ void Tutorial() {
                     PlaySound(NULL, NULL, 0);
                     PlaySound(TEXT("sounds\\tutorial2.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
                     cout << endl
-                         << "\"◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥\n"
+                         << "\"◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥\n"
                          << "\"  |_ _| \\| |/ __/ _ \\|  \\/  |_ _| \\| |/ __|  / __/ _ \\| \\| | \\| | __/ __|_   _|_ _/ _ \\| \\| |\n"
                          << "\"   | || .` | (_| (_) | |\\/| || || .` | (_ | | (_| (_) | .` | .` | _| (__  | |  | | (_) | .` |\n"
                          << "\"  |___|_|\\_|\\___\\___/|_|  |_|___|_|\\_|\\___|  \\___\\___/|_|\\_|_|\\_|___\\___| |_| |___\\___/|_|\\_|\n"
-                         << "\"◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥\n"
+                         << "\"◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥\n"
                          << endl;
                     cout << "[D3f4ult] 好吧...看來這個伺服器的基本資料不讓我們看 我們只好強制fu,4fm3y xul4x了..." << endl;
                     Sleep(3000);
@@ -234,11 +234,11 @@ void Tutorial() {
                     cout << "[D3f4ult] 哈哈哈 現在你變成亂碼了!" << endl;
                     Sleep(2000);
                     cout << endl
-                         << "\"◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥\n"
+                         << "\"◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥\n"
                          << "\"  |_ _| \\| |/ __/ _ \\|  \\/  |_ _| \\| |/ __|  / __/ _ \\| \\| | \\| | __/ __|_   _|_ _/ _ \\| \\| |\n"
                          << "\"   | || .` | (_| (_) | |\\/| || || .` | (_ | | (_| (_) | .` | .` | _| (__  | |  | | (_) | .` |\n"
                          << "\"  |___|_|\\_|\\___\\___/|_|  |_|___|_|\\_|\\___|  \\___\\___/|_|\\_|_|\\_|___\\___| |_| |___\\___/|_|\\_|\n"
-                         << "\"◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥\n"
+                         << "\"◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥\n"
                          << endl;
                     cout << "[未知的連線]: 全部都給我閉嘴" << endl;
                     Sleep(2000);
@@ -283,10 +283,11 @@ void Tutorial() {
                         if (homes=="home") {
                             break;
                         } else if (homes=="exit"){
-                            exit(0);
+                            string chse="2\n";
+                            break;
                         }
                     }
-                    break;
+                    return;
                 } else if (yn=="n") {
                     Cmd();
                     break;
@@ -297,6 +298,4 @@ void Tutorial() {
             break;
         }
     }
-
-
 }

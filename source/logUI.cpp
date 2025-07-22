@@ -26,7 +26,7 @@ void LogUI() {
                     MB_ICONINFORMATION | MB_OK
                 );
                 Cmd();
-                break;
+                return;
             } else {
                 MessageBoxA(
                     NULL,
@@ -37,7 +37,7 @@ void LogUI() {
             }
         } else if (name=="guest") {
             Noobornonoob();
-            break;
+            return;
         }
     }
 }

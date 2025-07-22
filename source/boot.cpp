@@ -102,4 +102,5 @@ void Boot() {
     cout << "Booting complete." << endl;
     Sleep(3000);
     LogUI();
+    return;
 }

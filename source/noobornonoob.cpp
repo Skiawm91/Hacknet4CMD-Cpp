@@ -15,10 +15,10 @@ void Noobornonoob() {
         cin >> sel;
         if (sel=="n") {
             Cmd();
-            break;
+            return;
         } else if (sel=="y") {
             Tutorial();
-            break;
+            return;
         }
     }
 }
