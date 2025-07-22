@@ -2,6 +2,8 @@
 #include <string>
 #include <windows.h>
 #include "logUI.h"
+#include "noobornonoob.h"
+#include "cmd.h"
 using namespace std;
 
 void LogUI() {
@@ -23,7 +25,8 @@ void LogUI() {
                     "Hacknet LogUI",
                     MB_ICONINFORMATION | MB_OK
                 );
-                break;// Coming Soon!
+                Cmd();
+                break;
             } else {
                 MessageBoxA(
                     NULL,
@@ -33,8 +36,8 @@ void LogUI() {
                 );
             }
         } else if (name=="guest") {
-            break; // Coming Soon!
+            Noobornonoob();
+            break;
         }
     }
-
 }

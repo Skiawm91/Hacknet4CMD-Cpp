@@ -41,21 +41,20 @@ DWORD GetRegDWORDValue(const wchar_t* name) {
 
 void Boot() {
     srand(static_cast<unsigned int>(time(nullptr)));
-    string block = "?";
+    string block = "=";
     string loading = "";
     for (int i = 1; i <= 100; ++i) {
         loading += block;
         cout << "\rProgress: [" << loading << "] " << i << "% " << flush;
         Sleep(rand() % 501);
     }
+    system("cls");
     cout << "\nLoading BIOS..." << endl;
     Sleep(1000);
     cout << "Getting system information..." << endl;
-    system("systeminfo | find \"BIOS Version\"");
-    system("systeminfo | find \"BIOS Manufacturer\"");
-    system("systeminfo | find \"BIOS Release Date\"");
-    system("systeminfo | find \"System Manufacturer\"");
-    system("systeminfo > nul");
+    for (int i = 1; i <= 5; ++i) {
+        system("systeminfo > nul");
+    }
     SYSTEM_INFO si;
     GetNativeSystemInfo(&si);
     if (_wtoi(getRegValue(L"CurrentBuildNumber").c_str()) >= 22000) {
