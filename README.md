@@ -26,7 +26,11 @@ If password invalid will uses MessageBox.
 git clone https://github.com/Skiawm91/Hacknet-For-CMD-Cpp.git
 cd Hacknet-For-CMD-Cpp
 ```
-3. Run `build.bat`
+3. Run `build.bat` and wait
+4. If Done, Press any keys
+5. If has no any errors, should it run
+<br/>
+Built File save in "Build" directory!
 ## Thanks
 * [Skiawm91](https://github.com/Skiawm91)
 * [AhQiang](https://github.com/Hoyiqiang)
