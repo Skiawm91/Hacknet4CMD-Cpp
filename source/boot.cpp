@@ -49,7 +49,7 @@ void Boot() {
         Sleep(rand() % 501);
     }
     system("cls");
-    cout << "\nLoading BIOS..." << endl;
+    cout << "Loading BIOS..." << endl;
     Sleep(1000);
     cout << "Getting system information..." << endl;
     for (int i = 1; i <= 5; ++i) {
