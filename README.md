@@ -12,7 +12,7 @@ I also hid systeminfo output.
 ### 2. Login UI
 If password invalid will uses MessageBox.
 ## How to use?
-1. Download from [Releases](https://github.com/Skiawm91/Hacknet-For-CMD-Cpp/Releases)
+1. Download from [Releases](https://github.com/Skiawm91/Hacknet-For-CMD-Cpp/releases)
 2. Extract file.
 3. Open "Hacknet.exe"
 4. Enjoy!
