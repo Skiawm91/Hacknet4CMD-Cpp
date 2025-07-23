@@ -25,7 +25,7 @@ void Tutorial() {
     system("killall afplay");
     if (musicThread.joinable()) {
         loop = false;
-        musicThread.join();
+        musicThread.detach();
     }
     loop=true;
     musicThread = thread(playSound, "tutorial.wav", 99812500);
@@ -131,7 +131,7 @@ void Tutorial() {
                     system("killall afplay");
                     if (musicThread.joinable()) {
                         loop = false;
-                        musicThread.join();
+                        musicThread.detach();
                     }
                     loop=true;
                     musicThread = thread(playSound, "tutorial2.wav", 66977959);
@@ -284,7 +284,7 @@ void Tutorial() {
                     system("killall afplay");
                     if (musicThread.joinable()) {
                         loop = false;
-                        musicThread.join();
+                        musicThread.detach();
                     }
                     loop=true;
                     musicThread = thread(playSound, "DreamHead.wav", 199107370);
