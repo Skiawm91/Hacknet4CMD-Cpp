@@ -3,7 +3,7 @@
 #include <string>
 #include <sstream>
 #include <cstdlib>
-#include <windows.h>
+#include <unistd.h>
 #include "hnasm.h"
 using namespace std;
 
@@ -24,7 +24,7 @@ void HNASM(const string& filename) {
             args >> arg1 >> arg2;
             try {
                 double seconds = stod(arg1);
-                Sleep(static_cast<DWORD>(seconds * 1000));
+                usleep(static_cast<int>(seconds * 1000000));
             } catch (const invalid_argument) {}
         }
         if (command=="PRINT") {

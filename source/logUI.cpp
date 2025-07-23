@@ -1,17 +1,16 @@
 #include <iostream>
 #include <string>
-#include <windows.h>
+#include <unistd.h>
 #include "logUI.h"
 #include "noobornonoob.h"
 #include "cmd.h"
 using namespace std;
 
 void LogUI() {
-    SetConsoleTitleA("Hacknet Login");
     string name;
     string pwd;
     while(true) {
-        system("cls");
+        system("clear");
         cout << "Please login a user. If have no any user, login \"guest\"" << endl;
         cout << "Login: ";
         cin >> name;
@@ -19,21 +18,8 @@ void LogUI() {
             cout << "Password: ";
             cin >> pwd;
             if (pwd=="hoyiqiang1006") {
-                MessageBoxA(
-                    NULL,
-                    "Login success!\n    Welcome!",
-                    "Hacknet LogUI",
-                    MB_ICONINFORMATION | MB_OK
-                );
                 Cmd();
                 return;
-            } else {
-                MessageBoxA(
-                    NULL,
-                    "Password Invalid!\nPlease try again!",
-                    "Hacknet LogUI",
-                    MB_ICONERROR | MB_OK
-                );
             }
         } else if (name=="guest") {
             Noobornonoob();

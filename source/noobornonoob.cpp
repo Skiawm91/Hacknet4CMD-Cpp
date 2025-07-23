@@ -8,7 +8,7 @@ using namespace std;
 void Noobornonoob() {
     string sel;
     while(true) {
-        system("cls");
+        system("clear");
         cout << "Welcome to Hacknet CMD!" << endl;
         cout << "If you never played this, type \"y\", else type \"n\"" << endl;
         cout << "type: ";

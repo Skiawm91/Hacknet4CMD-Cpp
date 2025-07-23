@@ -1,4 +1,4 @@
 .vscode
 build
-Hacknet.exe
-vc140.pdb
+Hacknet
+.DS_Store

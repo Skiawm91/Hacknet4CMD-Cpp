@@ -1,24 +1,39 @@
-#include <windows.h>
+#include <unistd.h>
 #include <iostream>
+#include <libgen.h>
+#include <limits.h>
+#include <mach-o/dyld.h>
 #include <cstdlib>
 #include <string>
+#include <thread>
+#include "sound.h"
 #include "boot.h"
-#include "porthack.h"
 using namespace std;
 
-int main(){
-    SetConsoleTitleA("Hacknet");
+int main(int argc, char* argv[]){
+    char path[PATH_MAX];
+    uint32_t size = sizeof(path);
+    if (_NSGetExecutablePath(path, &size) == 0) {
+        char path_copy[PATH_MAX];
+        strncpy(path_copy, path, PATH_MAX);
+        path_copy[PATH_MAX - 1] = '\0';
+        char* dir = dirname(path_copy);
+        chdir(dir);
+    }
+    cout << "\033]0;Hacknet\a";
     string chse;
-    PlaySound(TEXT("assets/musics/AmbientDroneClipped.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+    system("killall afplay");
+    loop=true;
+    musicThread = thread(playSound, "AmbientDroneClipped.wav", 108125057);
     while(true) {
-        system("cls");
+        system("clear");
         cout << "\n\n\n\n\n"
-             << "               ¢i¢iùß  ¢i¢iùß  ¢i¢i¢i¢i¢iùß   ¢i¢i¢i¢i¢iùß  ¢i¢iùß  ¢i¢iùß ¢i¢i¢iùß  ¢i¢iùß ¢i¢i¢i¢i¢i¢i¢iùß ¢i¢i¢i¢i¢i¢i¢i¢iùß\n"
-             << "               ¢i¢iùø  ¢i¢iùø ¢i¢iùÝ¢¤¢¤¢i¢iùß ¢i¢iùÝ¢¤¢¤¢i¢iùß ¢i¢iùø ¢i¢iùÝùå ¢i¢i¢i¢iùß ¢i¢iùø ¢i¢iùÝ¢¤¢¤¢¤¢¤ùå ùã¢¤¢¤¢i¢iùÝ¢¤¢¤ùå\n"
-             << "               ¢i¢i¢i¢i¢i¢i¢iùø ¢i¢i¢i¢i¢i¢i¢iùø ¢i¢iùø  ùã¢¤ùå ¢i¢i¢i¢i¢i¢¤ùå  ¢i¢iùÝ¢i¢iùß¢i¢iùø ¢i¢i¢i¢i¢iùß      ¢i¢iùø   \n"
-             << "               ¢i¢iùÝ¢¤¢¤¢i¢iùø ¢i¢iùÝ¢¤¢¤¢i¢iùø ¢i¢iùø  ¢i¢iùß ¢i¢iùÝ¢¤¢i¢iùß  ¢i¢iùøùã¢i¢i¢i¢iùø ¢i¢iùÝ¢¤¢¤ùå      ¢i¢iùø   \n"
-             << "               ¢i¢iùø  ¢i¢iùø ¢i¢iùø  ¢i¢iùø ùã¢i¢i¢i¢i¢iùÝùå ¢i¢iùø ùã¢i¢iùß ¢i¢iùø ùã¢i¢i¢iùø ¢i¢i¢i¢i¢i¢i¢iùß    ¢i¢iùø   \n"
-             << "               ùã¢¤ùå  ùã¢¤ùå ùã¢¤ùå  ùã¢¤ùå  ùã¢¤¢¤¢¤¢¤ùå  ùã¢¤ùå  ùã¢¤ùå ùã¢¤ùå  ùã¢¤¢¤ùå ùã¢¤¢¤¢¤¢¤¢¤¢¤ùå    ùã¢¤ùå   \n"
+             << "               â–ˆâ–ˆâ•—  â–ˆâ–ˆâ•—  â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•—   â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•—  â–ˆâ–ˆâ•—  â–ˆâ–ˆâ•— â–ˆâ–ˆâ–ˆâ•—  â–ˆâ–ˆâ•— â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•— â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•—\n"
+             << "               â–ˆâ–ˆâ•‘  â–ˆâ–ˆâ•‘ â–ˆâ–ˆâ•”â•â•â–ˆâ–ˆâ•— â–ˆâ–ˆâ•”â•â•â–ˆâ–ˆâ•— â–ˆâ–ˆâ•‘ â–ˆâ–ˆâ•”â• â–ˆâ–ˆâ–ˆâ–ˆâ•— â–ˆâ–ˆâ•‘ â–ˆâ–ˆâ•”â•â•â•â•â• â•šâ•â•â–ˆâ–ˆâ•”â•â•â•\n"
+             << "               â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•‘ â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•‘ â–ˆâ–ˆâ•‘  â•šâ•â• â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•â•  â–ˆâ–ˆâ•”â–ˆâ–ˆâ•—â–ˆâ–ˆâ•‘ â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•—      â–ˆâ–ˆâ•‘   \n"
+             << "               â–ˆâ–ˆâ•”â•â•â–ˆâ–ˆâ•‘ â–ˆâ–ˆâ•”â•â•â–ˆâ–ˆâ•‘ â–ˆâ–ˆâ•‘  â–ˆâ–ˆâ•— â–ˆâ–ˆâ•”â•â–ˆâ–ˆâ•—  â–ˆâ–ˆâ•‘â•šâ–ˆâ–ˆâ–ˆâ–ˆâ•‘ â–ˆâ–ˆâ•”â•â•â•      â–ˆâ–ˆâ•‘   \n"
+             << "               â–ˆâ–ˆâ•‘  â–ˆâ–ˆâ•‘ â–ˆâ–ˆâ•‘  â–ˆâ–ˆâ•‘ â•šâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•”â• â–ˆâ–ˆâ•‘ â•šâ–ˆâ–ˆâ•— â–ˆâ–ˆâ•‘ â•šâ–ˆâ–ˆâ–ˆâ•‘ â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ•—    â–ˆâ–ˆâ•‘   \n"
+             << "               â•šâ•â•  â•šâ•â• â•šâ•â•  â•šâ•â•  â•šâ•â•â•â•â•  â•šâ•â•  â•šâ•â• â•šâ•â•  â•šâ•â•â• â•šâ•â•â•â•â•â•â•    â•šâ•â•   \n"
              << "                [C++ Edition by Skiawm91]\n"
              << "\n\n\n\n\n\n\n"
              << "                             1) Play\n"
@@ -30,7 +45,7 @@ int main(){
             Boot();
         } else if (chse=="2") {
             string yn;
-            system("cls");
+            system("clear");
             while(true) {
                 cout << "Are you sure to quit Hacknet? (y/n)\n";
                 cout << "choose: ";
