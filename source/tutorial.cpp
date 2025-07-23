@@ -1,14 +1,12 @@
 #include <windows.h>
 #include <iostream>
 #include <string>
-#include <limits>
 #include "tutorial.h"
 #include "cmd.h"
 #include "porthack.h"
 using namespace std;
 
 void Tutorial() {
-    SetConsoleTitleA("Hacknet Tutorial");
     string yn;
     string cmd;
     system("cls");
@@ -23,7 +21,7 @@ void Tutorial() {
     Sleep(3000);
     system("cls");
     PlaySound(NULL, NULL, 0);
-    PlaySound(TEXT("sounds\\tutorial.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+    PlaySound(TEXT("assets/musics/tutorial.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
     Sleep(1000);
     while(true) {
         system("cls");
@@ -124,7 +122,7 @@ void Tutorial() {
                         }
                     }
                     PlaySound(NULL, NULL, 0);
-                    PlaySound(TEXT("sounds\\tutorial2.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+                    PlaySound(TEXT("assets/musics/tutorial2.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
                     cout << endl
                          << "\"◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥\n"
                          << "\"  |_ _| \\| |/ __/ _ \\|  \\/  |_ _| \\| |/ __|  / __/ _ \\| \\| | \\| | __/ __|_   _|_ _/ _ \\| \\| |\n"
@@ -272,7 +270,7 @@ void Tutorial() {
                     Sleep(2000);
                     system("cls");
                     PlaySound(NULL, NULL, 0);
-                    PlaySound(TEXT("sounds\\DreamHead.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+                    PlaySound(TEXT("assets/musics/DreamHead.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
                     cout << "Demo (兼具教學) 就到這裡結束了 後面我會繼續發更新\n"
                           << "感謝各位遊玩試玩版!\n"
                           << endl;

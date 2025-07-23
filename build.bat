@@ -11,8 +11,8 @@ if not defined VSPath (
 )
 call "%VSPath%\Common7\Tools\VsDevCmd.bat"
 rmdir /S /Q build > nul
-mkdir build build\sounds > nul
-copy /Y sounds\*.* build\sounds > nul
+mkdir build build\assets > nul
+xcopy /E assets build\assets > nul
 cl /Zi /EHsc /nologo /FeBuild\\Hacknet.exe /Fobuild\ source\*.cpp /link advapi32.lib winmm.lib user32.lib
 echo.
 echo Done.

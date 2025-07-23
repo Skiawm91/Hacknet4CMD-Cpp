@@ -3,12 +3,13 @@
 #include <cstdlib>
 #include <string>
 #include "boot.h"
+#include "porthack.h"
 using namespace std;
 
 int main(){
     SetConsoleTitleA("Hacknet");
     string chse;
-    PlaySound(TEXT("sounds\\AmbientDroneClipped.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+    PlaySound(TEXT("assets/musics/AmbientDroneClipped.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
     while(true) {
         system("cls");
         cout << "\n\n\n\n\n"
@@ -20,8 +21,8 @@ int main(){
              << "               ùã¢¤ùå  ùã¢¤ùå ùã¢¤ùå  ùã¢¤ùå  ùã¢¤¢¤¢¤¢¤ùå  ùã¢¤ùå  ùã¢¤ùå ùã¢¤ùå  ùã¢¤¢¤ùå ùã¢¤¢¤¢¤¢¤¢¤¢¤ùå    ùã¢¤ùå   \n"
              << "                [C++ Edition by Skiawm91]\n"
              << "\n\n\n\n\n\n\n"
-             << "                             1) ¥D­¶­±\n"
-             << "                             2) Â÷¶}Hacknet\n"
+             << "                             1) Play\n"
+             << "                             2) Quit Hacknet\n"
              << "\n\n\n\n\n\n\n\n\n";
             cout << "choose: ";
         cin >> chse;
@@ -31,7 +32,7 @@ int main(){
             string yn;
             system("cls");
             while(true) {
-                cout << "½T©w­nÂ÷¶}Hacknet¶Ü? (y/n)\n";
+                cout << "Are you sure to quit Hacknet? (y/n)\n";
                 cout << "choose: ";
                 cin >> yn;
                 if (yn=="y") {
