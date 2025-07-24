@@ -1,0 +1,15 @@
+1
+WAIT 2
+PRINT -----正在初始化FailSafe模式-----
+PRINT
+WAIT 3
+PRINT 這件事不對勁...比我想像中的還要複雜...
+WAIT 3
+PRINT 對了 忘了自我介紹 我的名子叫GigaByte 當你看到這則訊息時 代表我已經死了...
+PRINT
+WAIT 3
+PRINT ...
+WAIT 3
+CLEAR
+WAIT 1
+PLAYSOUND tutorial.wav

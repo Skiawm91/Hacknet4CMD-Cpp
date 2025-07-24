@@ -1,7 +1,7 @@
 #include "porthack.h"
-#include "hnasm.h"
+#include "hnasm/hnasm.h"
 using namespace std;
 
 void PortHack() {
-    HNASM("prthack.hn4cmd");
+    HNASM("prthack.hn4cmd", "");
 }

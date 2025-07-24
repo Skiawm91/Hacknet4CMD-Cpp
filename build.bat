@@ -1,6 +1,6 @@
 @echo off
+setlocal enabledelayedexpansion
 echo Starting Build...
-setlocal
 for /f "usebackq tokens=*" %%i in (`"%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -requires Microsoft.Component.MSBuild -property installationPath`) do (
     set "VSPath=%%i"
 )
@@ -13,7 +13,11 @@ call "%VSPath%\Common7\Tools\VsDevCmd.bat"
 rmdir /S /Q build > nul
 mkdir build build\assets > nul
 xcopy /E assets build\assets > nul
-cl /Zi /EHsc /nologo /FeBuild\\Hacknet.exe /Fobuild\ source\*.cpp /link advapi32.lib winmm.lib user32.lib
+set files=
+for /r "source" %%f in (*.cpp) do (
+    set files=!files! "%%f"
+)
+cl /EHsc /nologo /FeBuild\\Hacknet.exe /Fobuild\ !files! /link advapi32.lib winmm.lib user32.lib
 echo.
 echo Done.
 echo Press Enter to Run Application.
