@@ -22,9 +22,8 @@ int main(int argc, char* argv[]){
     }
     cout << "\033]0;Hacknet\a";
     string chse;
-    system("killall afplay");
-    loop=true;
-    musicThread = thread(playSound, "AmbientDroneClipped.wav", 108125057);
+    StopSound();
+    PlaySound("AmbientDroneClipped.wav");
     while(true) {
         system("clear");
         cout << "\n\n\n\n\n"
@@ -43,6 +42,8 @@ int main(int argc, char* argv[]){
         cin >> chse;
         if (chse=="1") {
             Boot();
+            StopSound();
+            PlaySound("AmbientDroneClipped.wav");
         } else if (chse=="2") {
             string yn;
             system("clear");

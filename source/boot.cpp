@@ -7,7 +7,7 @@
 #include "logUI.h"
 using namespace std;
 
-// get all information wuth GPT
+// Get Information by GPT
 string getSysctlString(const char* name) {
     size_t size = 0;
     sysctlbyname(name, nullptr, &size, nullptr, 0);
@@ -17,6 +17,7 @@ string getSysctlString(const char* name) {
     delete[] value;
     return result;
 }
+
 int getSysctlInt(const char* name) {
     int value = 0;
     size_t size = sizeof(value);

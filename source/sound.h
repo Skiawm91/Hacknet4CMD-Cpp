@@ -1,8 +1,5 @@
-#include <string>
-#include <atomic>
-#include <thread>
 #pragma once
+#include <string>
 using namespace std;
-extern thread musicThread; 
-extern atomic<bool> loop;
-void playSound(const string& soundFile, const int& time);
+void PlaySound(const string& soundFile);
+void StopSound();

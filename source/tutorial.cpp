@@ -19,16 +19,11 @@ void Tutorial() {
     usleep(3000000);
     cout << "對了 忘了自我介紹 我的名子叫GigaByte 當你看到這則訊息時 代表我已經死了...\n" << endl;
     usleep(3000000);
-    cout << "...";
+    cout << "..." << endl;
     usleep(3000000);
     system("clear");
-    system("killall afplay");
-    if (musicThread.joinable()) {
-        loop = false;
-        musicThread.detach();
-    }
-    loop=true;
-    musicThread = thread(playSound, "tutorial.wav", 99812500);
+    StopSound();
+    PlaySound("tutorial.wav");
     usleep(1000000);
     while(true) {
         system("clear");
@@ -128,13 +123,8 @@ void Tutorial() {
                             break;
                         }
                     }
-                    system("killall afplay");
-                    if (musicThread.joinable()) {
-                        loop = false;
-                        musicThread.detach();
-                    }
-                    loop=true;
-                    musicThread = thread(playSound, "tutorial2.wav", 66977959);
+                    StopSound();
+                    PlaySound("tutorial2.wav");
                     cout << endl
                          << "\"◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥\n"
                          << "\"  |_ _| \\| |/ __/ _ \\|  \\/  |_ _| \\| |/ __|  / __/ _ \\| \\| | \\| | __/ __|_   _|_ _/ _ \\| \\| |\n"
@@ -281,13 +271,8 @@ void Tutorial() {
                     cout << "[未知的連線]: 就這樣! 上傳!" << endl;
                     usleep(1200000);
                     system("clear");
-                    system("killall afplay");
-                    if (musicThread.joinable()) {
-                        loop = false;
-                        musicThread.detach();
-                    }
-                    loop=true;
-                    musicThread = thread(playSound, "DreamHead.wav", 199107370);
+                    StopSound();
+                    PlaySound("DreamHead.wav");
                     cout << "Demo (兼具教學) 就到這裡結束了 後面我會繼續發更新\n"
                           << "感謝各位遊玩試玩版!\n"
                           << endl;
