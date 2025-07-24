@@ -1,110 +1,140 @@
-#include <windows.h>
-#include <iostream>
-#include <string>
-#include "tutorial.h"
+ï»¿#include "tutorial.h"
+#include "sound.h"
 #include "cmd.h"
 #include "porthack.h"
+#ifdef _WIN32
+#include <windows.h>
+#undef PlaySound
+#else
+#include <unistd.h>
+#endif
+#include <iostream>
+#include <string>
 using namespace std;
+
+#ifndef _WIN32
+void Sleep(const int& ms) {usleep(ms * 1000);}
+#endif
 
 void Tutorial() {
     string yn;
     string cmd;
+    #ifdef _WIN32
     system("cls");
+    #else
+    system("clear");
+    #endif
     Sleep(2000);
-    cout << "-----¥¿¦bªì©l¤ÆFailSafe¼Ò¦¡-----\n" << endl;
+    cout << "-----æ­£åœ¨åˆå§‹åŒ–FailSafeæ¨¡å¼-----\n" << endl;
     Sleep(3000);
-    cout << "³o¥ó¨Æ¤£¹ï«l...¤ñ§Ú·Q¹³¤¤ªºÁÙ­n½ÆÂø...\n";
+    cout << "é€™ä»¶äº‹ä¸å°å‹...æ¯”æˆ‘æƒ³åƒä¸­çš„é‚„è¦è¤‡é›œ...\n";
     Sleep(3000);
-    cout << "¹ï¤F §Ñ¤F¦Û§Ú¤¶²Ð §Úªº¦W¤l¥sGigaByte ·í§A¬Ý¨ì³o«h°T®§®É ¥Nªí§Ú¤w¸g¦º¤F...\n" << endl;
+    cout << "å°äº† å¿˜äº†è‡ªæˆ‘ä»‹ç´¹ æˆ‘çš„åå­å«GigaByte ç•¶ä½ çœ‹åˆ°é€™å‰‡è¨Šæ¯æ™‚ ä»£è¡¨æˆ‘å·²ç¶“æ­»äº†...\n" << endl;
     Sleep(3000);
     cout << "...";
     Sleep(3000);
+    #ifdef _WIN32
     system("cls");
-    PlaySound(NULL, NULL, 0);
-    PlaySound(TEXT("assets/musics/tutorial.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+    #else
+    system("clear");
+    #endif
+    StopSound();
+    PlaySound("tutorial.wav");
     Sleep(1000);
     while(true) {
+        #ifdef _WIN32
         system("cls");
+        #else
+        system("clear");
+        #endif
         cout << "Tutorial Mode\n"
               << endl
-              << "§A²{¦b³B©ó¦MÀI¤§¤¤!\n"
-              << "½Ð¥Î³Ì§Öªº³t«×§¹¦¨±Ð¾Ç!\n"
-              << "¦pªG·Ç³Æ¦n¤F½Ð¿é¤Jy ­n¸õ¹L±Ð¾Ç½Ð¿é¤Jskip\n"
+              << "ä½ ç¾åœ¨è™•æ–¼å±éšªä¹‹ä¸­!\n"
+              << "è«‹ç”¨æœ€å¿«çš„é€Ÿåº¦å®Œæˆæ•™å­¸!\n"
+              << "å¦‚æžœæº–å‚™å¥½äº†è«‹è¼¸å…¥y è¦è·³éŽæ•™å­¸è«‹è¼¸å…¥skip\n"
               << endl;
         cout << "choose: ";
         cin >> yn;
         if (yn=="y") {
             while(true) {
+                #ifdef _WIN32
                 system("cls");
+                #else
+                system("clear");
+                #endif
                 cout << "Tutorial Mode\n"
                       << endl
-                      << "¤J«I¥L¤H²×ºÝ¸Ë¸m±N·|¹H¤Ï¤¤µØ¥Á°ê¦Dªk²Ä358±ø\n"
-                      << "±q²{¦b¶}©l ¬°¦Û¤vªº¦æ¬°­t³d§a!\n"
-                      << "¦pªG·Ç³Æ¦n¤F½Ð¿é¤JyÄ~Äò\n"
+                      << "å…¥ä¾µä»–äººçµ‚ç«¯è£ç½®å°‡æœƒé•åä¸­è¯æ°‘åœ‹åˆ‘æ³•ç¬¬358æ¢\n"
+                      << "å¾žç¾åœ¨é–‹å§‹ ç‚ºè‡ªå·±çš„è¡Œç‚ºè² è²¬å§!\n"
+                      << "å¦‚æžœæº–å‚™å¥½äº†è«‹è¼¸å…¥yç¹¼çºŒ\n"
                       << endl;
                 cout << "choose: ";
                 cin >> yn;
                 if (yn=="y") {
+                    #ifdef _WIN32
                     system("cls");
-                    cout << "¥¿¦b»PD3f4ult's PC«Ø¥ß¦w¥þ³s½u..." << endl;
+                    #else
+                    system("clear");
+                    #endif
+                    cout << "æ­£åœ¨èˆ‡D3f4ult's PCå»ºç«‹å®‰å…¨é€£ç·š..." << endl;
                     Sleep(2000);
-                    cout << "¤w³s±µ" << endl;
+                    cout << "å·²é€£æŽ¥" << endl;
                     Sleep(2000);
-                    cout << "[D3f4ult] §A¦n §Ú¬OBitªº§U¤â ²{¦b½Ð¸òªÌ§Ú¤@¨B¤@¨B¾Þ§@ ¾Þ§@§¹§A´N¾Ç·|¤F...¤T¤À¤§¤@" << endl;
+                    cout << "[D3f4ult] ä½ å¥½ æˆ‘æ˜¯Bitçš„åŠ©æ‰‹ ç¾åœ¨è«‹è·Ÿè€…æˆ‘ä¸€æ­¥ä¸€æ­¥æ“ä½œ æ“ä½œå®Œä½ å°±å­¸æœƒäº†...ä¸‰åˆ†ä¹‹ä¸€" << endl;
                     Sleep(1000);
-                    cout << "[D3f4ult] ­º¥ý ¦b¤U­±¿é¤Jmysvr" << endl;
+                    cout << "[D3f4ult] é¦–å…ˆ åœ¨ä¸‹é¢è¼¸å…¥mysvr" << endl;
                     while(true) {
                         cout << "[root] ~$ ";
                         getline(cin, cmd);
                         if (cmd=="mysvr") {
-                            cout << "¥¿¦b³s±µ¨ì§Úªº¦øªA¾¹..." << endl;
+                            cout << "æ­£åœ¨é€£æŽ¥åˆ°æˆ‘çš„ä¼ºæœå™¨..." << endl;
                             Sleep(2000);
-                            cout << "§¹¦¨" << endl;
+                            cout << "å®Œæˆ" << endl;
                             cout << "\n";
                             break;
                         } else {
-                            cout << "«ü¥O¿ù»~!" << endl;
+                            cout << "æŒ‡ä»¤éŒ¯èª¤!" << endl;
                             cout << "\n";
-                            cout << "[D3f4ult] ¦pªG¹J¨ì³oºØ±¡ªp §A»Ý­n¦A¿é¤J¤@¦¸«ü¥O ©ÎªÌ¿é¤Jhelp´M¨DÀ°§U" << endl;
+                            cout << "[D3f4ult] å¦‚æžœé‡åˆ°é€™ç¨®æƒ…æ³ ä½ éœ€è¦å†è¼¸å…¥ä¸€æ¬¡æŒ‡ä»¤ æˆ–è€…è¼¸å…¥helpå°‹æ±‚å¹«åŠ©" << endl;
                         }
                     }
-                    cout << "[D3f4ult] ¬Ý¨ì³o­Ó¥Nªí³s½u¦¨¥\" << endl;
+                    cout << "[D3f4ult] çœ‹åˆ°é€™å€‹ä»£è¡¨é€£ç·šæˆåŠŸ" << endl;
                     Sleep(2000);
-                    cout << "[D3f4ult] ¦pªG¬Ý¨ì³o­Ó¥Nªí³s½u¥¢±Ñ" << endl;
+                    cout << "[D3f4ult] å¦‚æžœçœ‹åˆ°é€™å€‹ä»£è¡¨é€£ç·šå¤±æ•—" << endl;
                     cout << "\n";
-                    cout << "¥¿¦b³s±µ¨ì§Úªº¦øªA¾¹..." << endl;
-                    cout << "¤w¥¢¥h³s½u!" << endl;
+                    cout << "æ­£åœ¨é€£æŽ¥åˆ°æˆ‘çš„ä¼ºæœå™¨..." << endl;
+                    cout << "å·²å¤±åŽ»é€£ç·š!" << endl;
                     cout << "\n";
                     Sleep(2000);
-                    cout << "[D3f4ult] »Ý­n­«·s³s½u¤@¦¸" << endl;
+                    cout << "[D3f4ult] éœ€è¦é‡æ–°é€£ç·šä¸€æ¬¡" << endl;
                     Sleep(3000);
-                    cout << "[D3f4ult] ¦ý¬O¤j³¡¤Àªº±¡ªp³£¬O³s½u¦¨¥\" << endl;
+                    cout << "[D3f4ult] ä½†æ˜¯å¤§éƒ¨åˆ†çš„æƒ…æ³éƒ½æ˜¯é€£ç·šæˆåŠŸ" << endl;
                     Sleep(2000);
-                    cout << "[D3f4ult] ±µ¤U¨Ó¿é¤Jscan" << endl;
+                    cout << "[D3f4ult] æŽ¥ä¸‹ä¾†è¼¸å…¥scan" << endl;
                     while(true) {
                         cout << "[myserver] ~$ ";
                         getline(cin, cmd);
                         if (cmd=="scan") {
-                            cout << "¥H¤U¬O¥Ø«e¦b°Ïºô¤W§äªº¨ìªº¹q¸£or¦øªA¾¹\n"
+                            cout << "ä»¥ä¸‹æ˜¯ç›®å‰åœ¨å€ç¶²ä¸Šæ‰¾çš„åˆ°çš„é›»è…¦orä¼ºæœå™¨\n"
                                  << "1. Jhon's Server (192.168.45.2)\n"
                                  << "2. Hoyiqiang's NAS (192.168.31.4)\n"
                                  << endl;
                             break;
                         }
                     }
-                    cout << "[D3f4ult] ±µµÛ¿é¤Jcnt 1 cnt´N¬O³s½u 1´N¬O¹q¸£ªº½s¸¹" << endl;
+                    cout << "[D3f4ult] æŽ¥è‘—è¼¸å…¥cnt 1 cntå°±æ˜¯é€£ç·š 1å°±æ˜¯é›»è…¦çš„ç·¨è™Ÿ" << endl;
                     while(true) {
                         cout << "[myserver] $~ ";
                         getline(cin, cmd);
                         if (cmd=="cnt 1") {
-                            cout << "¥¿¦b³s±µ¨ìJhon's Server..." << endl;
-                            cout << "§¹¦¨" << endl;
+                            cout << "æ­£åœ¨é€£æŽ¥åˆ°Jhon's Server..." << endl;
+                            cout << "å®Œæˆ" << endl;
                             Sleep(1000);
                             cout << "\n";
                             break;
                         }
                     }
-                    cout << "[D3f4ult] ±µªÌ¿é¤Jinfo" << endl;
+                    cout << "[D3f4ult] æŽ¥è€…è¼¸å…¥info" << endl;
                     while(true) {
                         cout << "[John's Server] $~ ";
                         getline(cin, cmd);
@@ -121,31 +151,31 @@ void Tutorial() {
                             break;
                         }
                     }
-                    PlaySound(NULL, NULL, 0);
-                    PlaySound(TEXT("assets/musics/tutorial2.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+                    StopSound();
+                    PlaySound("tutorial2.wav");
                     cout << endl
-                         << "\"¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª\n"
+                         << "\"â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥\n"
                          << "\"  |_ _| \\| |/ __/ _ \\|  \\/  |_ _| \\| |/ __|  / __/ _ \\| \\| | \\| | __/ __|_   _|_ _/ _ \\| \\| |\n"
                          << "\"   | || .` | (_| (_) | |\\/| || || .` | (_ | | (_| (_) | .` | .` | _| (__  | |  | | (_) | .` |\n"
                          << "\"  |___|_|\\_|\\___\\___/|_|  |_|___|_|\\_|\\___|  \\___\\___/|_|\\_|_|\\_|___\\___| |_| |___\\___/|_|\\_|\n"
-                         << "\"¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª\n"
+                         << "\"â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥\n"
                          << endl;
-                    cout << "[D3f4ult] ¦n§a...¬Ý¨Ó³o­Ó¦øªA¾¹ªº°ò¥»¸ê®Æ¤£Åý§Ú­Ì¬Ý §Ú­Ì¥u¦n±j¨îfu,4fm3y xul4x¤F..." << endl;
+                    cout << "[D3f4ult] å¥½å§...çœ‹ä¾†é€™å€‹ä¼ºæœå™¨çš„åŸºæœ¬è³‡æ–™ä¸è®“æˆ‘å€‘çœ‹ æˆ‘å€‘åªå¥½å¼·åˆ¶fu,4fm3y xul4xäº†..." << endl;
                     Sleep(3000);
-                    cout << "[D3f4ult] what??? yp3ak7¦^¨Æ??? §Úªº¤åy4«ç»ò1u04t/6¶Ã½X¤F???" << endl;
+                    cout << "[D3f4ult] what??? yp3ak7å›žäº‹??? æˆ‘çš„æ–‡y4æ€Žéº¼1u04t/6äº‚ç¢¼äº†???" << endl;
                     Sleep(2000);
-                    cout << "[hacker]: «¢«¢«¢!!! §Aªº¹q¸£¤w¸g³Q§Ú´x±±¤F!!!" << endl;
+                    cout << "[hacker]: å“ˆå“ˆå“ˆ!!! ä½ çš„é›»è…¦å·²ç¶“è¢«æˆ‘æŽŒæŽ§äº†!!!" << endl;
                     Sleep(2000);
-                    cout << "[D3f4ult] «ç»ò...huiogrbeijpa ¦^¨Æ..." << endl;
+                    cout << "[D3f4ult] æ€Žéº¼...huiogrbeijpa å›žäº‹..." << endl;
                     Sleep(3000);
-                    cout << "[hacker]: ¸ò§A¦Û§Ú¤¶²Ð¤@¤U §Ú¥s¤j©ú §Ú¬O¼ö·R¹q¸£ªºª±®a ¤]³ßÅwª±¹q¸£ ¦Ó²{¦bªº±¡ªp´N¬O§Ú·dªº «¢«¢«¢«¢!!!" << endl;
+                    cout << "[hacker]: è·Ÿä½ è‡ªæˆ‘ä»‹ç´¹ä¸€ä¸‹ æˆ‘å«å¤§æ˜Ž æˆ‘æ˜¯ç†±æ„›é›»è…¦çš„çŽ©å®¶ ä¹Ÿå–œæ­¡çŽ©é›»è…¦ è€Œç¾åœ¨çš„æƒ…æ³å°±æ˜¯æˆ‘æžçš„ å“ˆå“ˆå“ˆå“ˆ!!!" << endl;
                     Sleep(2000);
-                    cout << "[D3f4ult] §A¬°gp6ak7...­n³ou;4°µ???" << endl;
+                    cout << "[D3f4ult] ä½ ç‚ºgp6ak7...è¦é€™u;4åš???" << endl;
                     Sleep(2000);
-                    cout << "[hacker]: ¦]¬°§Ú·Q¦ÒÅç§AªºÀH¾÷À³ÅÜ¯à¤O°Úawa" << endl;
+                    cout << "[hacker]: å› ç‚ºæˆ‘æƒ³è€ƒé©—ä½ çš„éš¨æ©Ÿæ‡‰è®Šèƒ½åŠ›å•Šawa" << endl;
                     Sleep(3000);
-                    cout << "[D3f4ult] ¬JµM5k4u;4...¨º´Nao6¿ìªk¤F... §Ö! ¥Î§Oªº¤èªk¸Ñ¨M³o¦¸ªº¦M¾÷!" << endl;
-                    cout << "(¦^¨ì§Aªº¹q¸£ ÀË¬dlog ¬Ý¬Ý¥Lªº³s½uÂÜ¸ñ)" << endl;
+                    cout << "[D3f4ult] æ—¢ç„¶5k4u;4...é‚£å°±ao6è¾¦æ³•äº†... å¿«! ç”¨åˆ¥çš„æ–¹æ³•è§£æ±ºé€™æ¬¡çš„å±æ©Ÿ!" << endl;
+                    cout << "(å›žåˆ°ä½ çš„é›»è…¦ æª¢æŸ¥log çœ‹çœ‹ä»–çš„é€£ç·šè¹¤è·¡)" << endl;
                     while(true) {
                         cout << "[Jhon's Server] ~$ C:/";
                         getline(cin, cmd);
@@ -178,7 +208,7 @@ void Tutorial() {
                                  << "netcfgx.dll\n";
                         }
                     }
-                    cout << "[D3f4ult] ¦n¤F! ±µµÛscan ¬d¬d¬Ý²{¦bhackerªº½s¸¹¬O¦h¤Ö!" << endl;
+                    cout << "[D3f4ult] å¥½äº†! æŽ¥è‘—scan æŸ¥æŸ¥çœ‹ç¾åœ¨hackerçš„ç·¨è™Ÿæ˜¯å¤šå°‘!" << endl;
                     while(true) {
                         cout << "[mysvr] ~$ C:/";
                         getline(cin, cmd);
@@ -186,13 +216,13 @@ void Tutorial() {
                             break;
                         }
                     }
-                    cout << "¥H¤U¬O¥Ø«e¦b°Ïºô¤W§äªº¨ìªº¹q¸£or¦øªA¾¹\n"
+                    cout << "ä»¥ä¸‹æ˜¯ç›®å‰åœ¨å€ç¶²ä¸Šæ‰¾çš„åˆ°çš„é›»è…¦orä¼ºæœå™¨\n"
                           << "1. Jhon's Server (192.168.45.2)\n"
                           << "2. Hoyiqiang's NAS (192.168.31.4)\n"
                           << "3. huirohbuhrupieahiui (666.666.666.666)\n"
                           << endl;
                     Sleep(2000);
-                    cout << "echo [D3f4ult] ±µªÌcnt 3" << endl;
+                    cout << "echo [D3f4ult] æŽ¥è€…cnt 3" << endl;
                     while(true) {
                         cout << "[myserver] $~ ";
                         getline(cin, cmd);
@@ -200,7 +230,7 @@ void Tutorial() {
                             break;
                         }
                     }
-                    cout << "echo [D3f4ult] ¦n! ²{¦b¿é¤JporthackÀb¤J¥Lªº¹q¸£!" << endl;
+                    cout << "echo [D3f4ult] å¥½! ç¾åœ¨è¼¸å…¥porthacké§­å…¥ä»–çš„é›»è…¦!" << endl;
                     while(true) {
                         cout << "[huirohbuhrupieahiui] $~ ";
                         getline(cin, cmd);
@@ -208,13 +238,13 @@ void Tutorial() {
                             cout << "{PortHack} running..." << endl;
                             PortHack();
                             Sleep(2000);
-                            cout << "[D3f4ult] §Ö°Ú...¤w¸gdj94¨Ó¤£¤Î¤F!" << endl;
+                            cout << "[D3f4ult] å¿«å•Š...å·²ç¶“dj94ä¾†ä¸åŠäº†!" << endl;
                             Sleep(5000);
                             cout << "{PortHack} done!" << endl;
                             break;
                         }
                     }
-                    cout << "[D3f4ult] «Ü¦n! ²{¦b¿é¤Jrm *§R°£¹q¸£gl4ªº©Ò¦³¸ê®Æ (¤£¬O§Aªº¹q¸£)" << endl;
+                    cout << "[D3f4ult] å¾ˆå¥½! ç¾åœ¨è¼¸å…¥rm *åˆªé™¤é›»è…¦gl4çš„æ‰€æœ‰è³‡æ–™ (ä¸æ˜¯ä½ çš„é›»è…¦)" << endl;
                     while(true) {
                         cout << "[huirohbuhrupieahiui] $~ C:/";
                         getline(cin, cmd);
@@ -225,58 +255,62 @@ void Tutorial() {
                             break;
                         }
                     }
-                    cout << "[D3f4ult] «D±`¦n ²×©ó§¹¦¨¤F!" << endl;
+                    cout << "[D3f4ult] éžå¸¸å¥½ çµ‚æ–¼å®Œæˆäº†!" << endl;
                     Sleep(2000);
-                    cout << "[hacker]: ¥i´c...§Aªºnjo6ru À³ÅÜ¯à¤O«ç»òdk3u3³o»ò±j???" << endl;
+                    cout << "[hacker]: å¯æƒ¡...ä½ çš„njo6ru æ‡‰è®Šèƒ½åŠ›æ€Žéº¼dk3u3é€™éº¼å¼·???" << endl;
                     Sleep(2000);
-                    cout << "[D3f4ult] «¢«¢«¢ ²{¦b§AÅÜ¦¨¶Ã½X¤F!" << endl;
+                    cout << "[D3f4ult] å“ˆå“ˆå“ˆ ç¾åœ¨ä½ è®Šæˆäº‚ç¢¼äº†!" << endl;
                     Sleep(2000);
                     cout << endl
-                         << "\"¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª\n"
+                         << "\"â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥\n"
                          << "\"  |_ _| \\| |/ __/ _ \\|  \\/  |_ _| \\| |/ __|  / __/ _ \\| \\| | \\| | __/ __|_   _|_ _/ _ \\| \\| |\n"
                          << "\"   | || .` | (_| (_) | |\\/| || || .` | (_ | | (_| (_) | .` | .` | _| (__  | |  | | (_) | .` |\n"
                          << "\"  |___|_|\\_|\\___\\___/|_|  |_|___|_|\\_|\\___|  \\___\\___/|_|\\_|_|\\_|___\\___| |_| |___\\___/|_|\\_|\n"
-                         << "\"¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª¢©¢ª\n"
+                         << "\"â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥â—£â—¥\n"
                          << endl;
-                    cout << "[¥¼ª¾ªº³s½u]: ¥þ³¡³£µ¹§Ú³¬¼L" << endl;
+                    cout << "[æœªçŸ¥çš„é€£ç·š]: å…¨éƒ¨éƒ½çµ¦æˆ‘é–‰å˜´" << endl;
                     Sleep(2000);
-                    cout << "[D3f4ult] §A¬O½Ö???" << endl;
+                    cout << "[D3f4ult] ä½ æ˜¯èª°???" << endl;
                     Sleep(2000);
-                    cout << "[¥¼ª¾ªº³s½u]: §Ú¬O³o­Ó¹CÀ¸ªº³Ð³yªÌ:ªü±j" << endl;
+                    cout << "[æœªçŸ¥çš„é€£ç·š]: æˆ‘æ˜¯é€™å€‹éŠæˆ²çš„å‰µé€ è€…:é˜¿å¼·" << endl;
                     Sleep(2000);
-                    cout << "[D3f4ult] ¤£¬O°Ú §A²V¶i¨Ó·F¹À???" << endl;
+                    cout << "[D3f4ult] ä¸æ˜¯å•Š ä½ æ··é€²ä¾†å¹¹å˜›???" << endl;
                     Sleep(2000);
-                    cout << "[¥¼ª¾ªº³s½u]: §Ú­n§i¶D§A­Ì¨â­Ó §Ú¦b§A­Ìªº¹q¸£¸Ì©ñ¤F¨â­Óforkbomb" << endl;
+                    cout << "[æœªçŸ¥çš„é€£ç·š]: æˆ‘è¦å‘Šè¨´ä½ å€‘å…©å€‹ æˆ‘åœ¨ä½ å€‘çš„é›»è…¦è£¡æ”¾äº†å…©å€‹forkbomb" << endl;
                     Sleep(2000);
                     cout << "[D3f4ult] what?????" << endl;
                     Sleep(2000);
                     cout << "[hacker]: what??????????????" << endl;
                     Sleep(2000);
-                    cout << "[¥¼ª¾ªº³s½u]: ¹L¤F5¬í«á ³o­Óforkbomb´N·|Ãz¬µ §A¹q¸£¤Wªº©Ò¦³¸ê®Æ³£·|¤£¨£" << endl;
+                    cout << "[æœªçŸ¥çš„é€£ç·š]: éŽäº†5ç§’å¾Œ é€™å€‹forkbombå°±æœƒçˆ†ç‚¸ ä½ é›»è…¦ä¸Šçš„æ‰€æœ‰è³‡æ–™éƒ½æœƒä¸è¦‹" << endl;
                     Sleep(2000);
-                    cout << "[D3f4ult] §A¬°¤°»ò­n³o¼Ë°µ???" << endl;
+                    cout << "[D3f4ult] ä½ ç‚ºä»€éº¼è¦é€™æ¨£åš???" << endl;
                     Sleep(2000);
-                    cout << "[¥¼ª¾ªº³s½u]: ¦]¬°§Ú·Q¤£¨ì¼@±¡ªºµ²§À¤F ._." << endl;
+                    cout << "[æœªçŸ¥çš„é€£ç·š]: å› ç‚ºæˆ‘æƒ³ä¸åˆ°åŠ‡æƒ…çš„çµå°¾äº† ._." << endl;
                     Sleep(2000);
-                    cout << "[D3f4ult] ­üËç§Ú*!!!!!!!!!!" << endl;
+                    cout << "[D3f4ult] å”‰å‘¦æˆ‘*!!!!!!!!!!" << endl;
                     Sleep(1000);
                     cout << "[hacker]: what the f***" << endl;
                     Sleep(1000);
-                    cout << "(µ{§Ç¤w³Q±j¨î°±¤î)" << endl;
+                    cout << "(ç¨‹åºå·²è¢«å¼·åˆ¶åœæ­¢)" << endl;
                     Sleep(1000);
-                    cout << "[hacker]: (¤w¤¤Â_³s½u)" << endl;
+                    cout << "[hacker]: (å·²ä¸­æ–·é€£ç·š)" << endl;
                     Sleep(1000);
-                    cout << "[¥¼ª¾ªº³s½u]: ´N³o¼Ë! ¤W¶Ç!" << endl;
+                    cout << "[æœªçŸ¥çš„é€£ç·š]: å°±é€™æ¨£! ä¸Šå‚³!" << endl;
                     Sleep(2000);
+                    #ifdef _WIN32
                     system("cls");
-                    PlaySound(NULL, NULL, 0);
-                    PlaySound(TEXT("assets/musics/DreamHead.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
-                    cout << "Demo (­Ý¨ã±Ð¾Ç) ´N¨ì³o¸Ìµ²§ô¤F «á­±§Ú·|Ä~Äòµo§ó·s\n"
-                          << "·PÁÂ¦U¦ì¹Cª±¸Õª±ª©!\n"
+                    #else
+                    system("clear");
+                    #endif
+                    StopSound();
+                    PlaySound("assets/musics/DreamHead.wav");
+                    cout << "Demo (å…¼å…·æ•™å­¸) å°±åˆ°é€™è£¡çµæŸäº† å¾Œé¢æˆ‘æœƒç¹¼çºŒç™¼æ›´æ–°\n"
+                          << "æ„Ÿè¬å„ä½éŠçŽ©è©¦çŽ©ç‰ˆ!\n"
                           << endl;
                     string homes;
                     while(true) {
-                        cout << "¦^¨ì¥D¿ï³æ(home) Â÷¶}(exit) :";
+                        cout << "å›žåˆ°ä¸»é¸å–®(home) é›¢é–‹(exit) :";
                         cin >> homes;
                         if (homes=="home") {
                             break;

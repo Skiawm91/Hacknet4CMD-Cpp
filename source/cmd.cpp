@@ -10,7 +10,11 @@ void Cmd() {
          << "CMD User Interface Coming Soon!\n"
          << endl
          << "==================================";
-    system("pause");
+    #ifdef _WIN32
+    system("pause > nul");
+    #else
+    system("read -p")
+    #endif
     // string command;
     // cout << "hoyiqiang@hacknet~$ ";
     // getline(cin, command); 

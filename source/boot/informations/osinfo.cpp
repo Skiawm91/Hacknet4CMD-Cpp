@@ -1,10 +1,19 @@
 #include "infos.h"
+#ifdef _WIN32
 #include <windows.h>
+#else
+#include <unistd.h>
+#endif
 #include <cstdlib>
 #include <string>
 #include <iostream>
 using namespace std;
 
+#ifndef _WIN32
+void Sleep(const int& ms) {usleep(ms * 1000);}
+#endif
+
+#ifdef _WIN32
 // Pre get "OS Name"/"OS Verion" by ChatGPT
 wstring getRegValue(const wchar_t* keyName) {
     HKEY hKey;
@@ -38,9 +47,28 @@ DWORD GetRegDWORDValue(const wchar_t* name) {
     RegCloseKey(hKey);
     return data;
 }
+#elif __APPLE__
+string getSysctlString(const char* name) {
+    size_t size = 0;
+    sysctlbyname(name, nullptr, &size, nullptr, 0);
+    char* value = new char[size];
+    sysctlbyname(name, value, &size, nullptr, 0);
+    string result(value);
+    delete[] value;
+    return result;
+}
+
+int getSysctlInt(const char* name) {
+    int value = 0;
+    size_t size = sizeof(value);
+    sysctlbyname(name, &value, &size, nullptr, 0);
+    return value;
+}
+#endif
 
 void OSInfo() {
     cout << "Getting system information..." << endl;
+    #ifdef _WIN32
     for (int i = 1; i <= 5; ++i) {
         system("systeminfo > nul");
     }
@@ -56,4 +84,10 @@ void OSInfo() {
         wcout << L"OS Version: " << osvi.dwMajorVersion << L"." << osvi.dwMinorVersion << endl;
     }
     wcout << L"OS Version: " << GetRegDWORDValue(L"CurrentMajorVersionNumber") << "." << GetRegDWORDValue(L"CurrentMinorVersionNumber") << endl;
+    #elif __APPLE__
+    cout << "OS Name: Mac OS X" << endl;
+    cout << "OS Version: " << getSysctlString("kern.osproductversion") << endl;
+    cout << "OS Arch: " << getSysctlString("hw.machine") << endl;
+    #endif
 }
+

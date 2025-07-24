@@ -1,11 +1,19 @@
 #include <iostream>
 #include <string>
+#ifdef _WIN32
 #include <windows.h>
+#else
+#include <unistd.h>
+#endif
 #include "boot.h"
 #include "informations/infos.h"
 #include "utilities/utils.h"
 #include "../logUI.h"
 using namespace std;
+
+#ifndef _WIN32
+void Sleep(const int& ms) {usleep(ms * 1000);}
+#endif
 
 void Boot() {
     srand(static_cast<unsigned int>(time(nullptr)));
@@ -16,7 +24,11 @@ void Boot() {
         cout << "\rProgress: [" << loading << "] " << i << "% " << flush;
         Sleep(rand() % 501);
     }
+    #ifdef _WIN32
     system("cls");
+    #elif __APPLE__
+    system("clear");
+    #endif
     cout << "Loading BIOS..." << endl;
     Sleep(1000);
     OSInfo();

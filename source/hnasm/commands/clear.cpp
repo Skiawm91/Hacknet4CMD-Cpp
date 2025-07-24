@@ -3,7 +3,7 @@
 void CLEAR() {
     #ifdef _WIN32
     system("cls");
-    #elif __APPLE__
+    #else
     system("clear");
     #endif
 }
