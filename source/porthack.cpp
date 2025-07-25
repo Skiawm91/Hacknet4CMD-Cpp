@@ -3,5 +3,5 @@
 using namespace std;
 
 void PortHack() {
-    HNASM("prthack.hn4cmd", "");
+    HNASM("prthack.hn4cmd", NULL);
 }

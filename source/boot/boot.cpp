@@ -20,8 +20,9 @@ void Boot() {
     string block = "=";
     string loading = "";
     for (int i = 1; i <= 100; ++i) {
-        loading += block;
-        cout << "\rProgress: [" << loading << "] " << i << "% " << flush;
+        if (i % 10 == 0) {loading += block;}
+        if (i == 100) {cout << "\rProgress: [" << loading << "] " << i << "% " << flush;}
+        else {cout << "\rProgress: [" << loading << ">" "] " << i << "% " << flush;}
         Sleep(rand() % 501);
     }
     #ifdef _WIN32

@@ -1,10 +1,9 @@
-#include "tutorial.h"
+﻿#include "tutorial.h"
 #include "audio.h"
 #include "cmd.h"
 #include "porthack.h"
 #ifdef _WIN32
 #include <windows.h>
-#undef PlaySound
 #else
 #include <unistd.h>
 #endif
@@ -38,8 +37,8 @@ void Tutorial() {
     #else
     system("clear");
     #endif
-    StopSound();
-    PlaySound("tutorial.wav");
+    StopAudio();
+    PlayAudio("tutorial.wav");
     Sleep(1000);
     while(true) {
         #ifdef _WIN32
@@ -151,8 +150,8 @@ void Tutorial() {
                             break;
                         }
                     }
-                    StopSound();
-                    PlaySound("tutorial2.wav");
+                    StopAudio();
+                    PlayAudio("tutorial2.wav");
                     cout << endl
                          << "\"◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥◣◥\n"
                          << "\"  |_ _| \\| |/ __/ _ \\|  \\/  |_ _| \\| |/ __|  / __/ _ \\| \\| | \\| | __/ __|_   _|_ _/ _ \\| \\| |\n"
@@ -303,8 +302,8 @@ void Tutorial() {
                     #else
                     system("clear");
                     #endif
-                    StopSound();
-                    PlaySound("assets/musics/DreamHead.wav");
+                    StopAudio();
+                    PlayAudio("assets/musics/DreamHead.wav");
                     cout << "Demo (兼具教學) 就到這裡結束了 後面我會繼續發更新\n"
                           << "感謝各位遊玩試玩版!\n"
                           << endl;

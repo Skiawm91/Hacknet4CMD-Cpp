@@ -1,6 +1,7 @@
-#include "audio.h"
+﻿#include "audio.h"
 #include "logUI.h"
 #include "hnasm/hnasm.h"
+#include "boot/boot.h"
 #ifdef _WIN32
 #include <windows.h>
 #undef PlaySound
@@ -28,9 +29,10 @@ int main(){
         char* dir = dirname(path_copy);
         chdir(dir);
     }
-    cout << "\033]0;$title\007";
+    cout << "\033]0;$Hacknet\007";
     #endif
     int chse;
+    extern string input; // from "hnasm/commands/getinput.cpp"
     StopAudio();
     PlayAudio("AmbientDroneClipped.wav");
     while(true) {
@@ -39,11 +41,11 @@ int main(){
         #else
         system("clear");
         #endif
-        int chse;
         HNASM("ui.chns", "HOME");
+        try {chse = stoi(input);} catch (invalid_argument) {chse = 0;}
         switch(chse) {
             case 1:
-                LogUI();
+                Boot();
             case 4:
                 string yn;
                 #ifdef _WIN32

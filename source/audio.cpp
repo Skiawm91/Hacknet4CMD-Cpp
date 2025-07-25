@@ -1,14 +1,15 @@
-// Mac sound player by GPT
+// Mac audio play/stop by GPT
 #include "audio.h"
 #ifdef _WIN32
 #include <windows.h>
 #elif __APPLE__
 #include <AudioToolbox/AudioToolbox.h>
+#include <CoreFoundation/CoreFoundation.h>
 #include <atomic>
 #include <thread>
 #include <chrono>
-#include <cstring>
 #endif
+#include <string>
 using namespace std;
 
 #ifdef _WIN32
@@ -23,7 +24,7 @@ static atomic<bool> keepPlaying(false);
 static thread playerThread;
 
 struct PlayerContext {
-    AudioFileID audioFile = nullptr;
+    ExtAudioFileRef audioFile = nullptr;
     AudioQueueRef queue = nullptr;
     UInt64 packetPos = 0;
     AudioStreamPacketDescription* packetDescs = nullptr;
@@ -37,65 +38,63 @@ static void AQOC(void* inUserData, AudioQueueRef inAQ, AudioQueueBufferRef inBuf
         AudioQueueStop(ctx->queue, false);
         return;
     }
-    UInt32 numBytes = 0;
     UInt32 numPackets = ctx->numPacketsToRead;
-    OSStatus status = AudioFileReadPackets(ctx->audioFile, false, &numBytes, ctx->packetDescs, ctx->packetPos, &numPackets, inBuffer->mAudioData);
+    AudioBufferList bufferList;
+    bufferList.mNumberBuffers = 1;
+    bufferList.mBuffers[0].mData = inBuffer->mAudioData;
+    bufferList.mBuffers[0].mDataByteSize = ctx->maxPacketSize * numPackets;
+    OSStatus status = ExtAudioFileRead(ctx->audioFile, &numPackets, &bufferList);
     if (status != noErr || numPackets == 0) {
-        ctx->packetPos = 0;
-        status = AudioFileReadPackets(ctx->audioFile, false, &numBytes, ctx->packetDescs, ctx->packetPos, &numPackets, inBuffer->mAudioData);
+        ExtAudioFileSeek(ctx->audioFile, 0);
+        status = ExtAudioFileRead(ctx->audioFile, &numPackets, &bufferList);
         if (status != noErr) {
+            keepPlaying = false;
             return;
         }
     }
-    inBuffer->mAudioDataByteSize = numBytes;
+    inBuffer->mAudioDataByteSize = bufferList.mBuffers[0].mDataByteSize;
     AudioQueueEnqueueBuffer(inAQ, inBuffer, 0, nullptr);
-    ctx->packetPos += numPackets;
 }
 
 static void playerFunc(string filepath) {
     PlayerContext ctx = {};
     CFURLRef fileURL = CFURLCreateFromFileSystemRepresentation(nullptr, (const UInt8*)filepath.c_str(), (CFIndex)filepath.size(), false);
-    if (AudioFileOpenURL(fileURL, kAudioFileReadPermission, 0, &ctx.audioFile) != noErr) {
+    if (ExtAudioFileOpenURL(fileURL, &ctx.audioFile) != noErr) {
         CFRelease(fileURL);
         return;
     }
     CFRelease(fileURL);
-    UInt32 size = sizeof(AudioStreamBasicDescription);
     AudioStreamBasicDescription format = {};
-    if (AudioFileGetProperty(ctx.audioFile, kAudioFilePropertyDataFormat, &size, &format) != noErr) {
-        return;
-    }
-    if (AudioQueueNewOutput(&format, AQOC, &ctx, nullptr, nullptr, 0, &ctx.queue) != noErr) {
-        return;
-    }
+    UInt32 size = sizeof(format);
+    ExtAudioFileGetProperty(ctx.audioFile, kExtAudioFileProperty_FileDataFormat, &size, &format);
+    AudioQueueNewOutput(&format, AQOC, &ctx, nullptr, nullptr, 0, &ctx.queue);
+
     UInt32 maxPacketSize = 0;
     size = sizeof(maxPacketSize);
-    AudioFileGetProperty(ctx.audioFile, kAudioFilePropertyPacketSizeUpperBound, &size, &maxPacketSize);
+    ExtAudioFileGetProperty(ctx.audioFile, kExtAudioFileProperty_ClientMaxPacketSize, &size, &maxPacketSize);
     ctx.maxPacketSize = maxPacketSize;
     UInt32 bufferByteSize = maxPacketSize * ctx.numPacketsToRead;
-    ctx.packetDescs = new AudioStreamPacketDescription[ctx.numPacketsToRead];
+    ctx.packetDescs = nullptr;
     for (int i = 0; i < 3; ++i) {
         AudioQueueBufferRef buffer;
         AudioQueueAllocateBuffer(ctx.queue, bufferByteSize, &buffer);
         AQOC(&ctx, ctx.queue, buffer);
     }
     AudioQueueStart(ctx.queue, nullptr);
-    while (keepPlaying.load()) {
-        this_thread::sleep_for(chrono::milliseconds(100));
-    }
+    while (keepPlaying.load())
+    this_thread::sleep_for(chrono::milliseconds(100));
     AudioQueueStop(ctx.queue, true);
     AudioQueueDispose(ctx.queue, true);
-    AudioFileClose(ctx.audioFile);
-    delete[] ctx.packetDescs;
+    ExtAudioFileDispose(ctx.audioFile);
 }
 
-void PlaySound(const string& soundFile) {
+void PlayAudio(const string& soundFile) {
     if (keepPlaying.load()) return;
     keepPlaying = true;
     playerThread = thread(playerFunc, "assets/musics/" + soundFile);
 }
 
-void StopSound() {
+void StopAudio() {
     if (!keepPlaying.load()) return;
     keepPlaying = false;
     if (playerThread.joinable()) playerThread.join();

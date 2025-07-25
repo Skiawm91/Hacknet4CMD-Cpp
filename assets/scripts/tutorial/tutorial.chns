@@ -1,4 +1,4 @@
-1
+BEGIN_TUTORIAL1
 CLEAR
 PRINT
 PRINT tutorial mode
@@ -8,7 +8,8 @@ PRINT 請用最快的速度完成教學!
 PRINT 如果準備好了請輸入y 要跳過教學請輸入skip
 PRINT
 GETINPUT choose:
-STOP
+END_TUTORIAL1
+BEGIN_TUTORIAL2
 CLEAR
 PRINT
 PRINT tutorial mode
@@ -18,3 +19,4 @@ PRINT 從現在開始 為自己的行為負責吧!
 PRINT 如果準備好了請輸入y繼續
 PRINT
 GETINPUT choose:
+END_TUTORIAL2
