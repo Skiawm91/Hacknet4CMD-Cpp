@@ -24,8 +24,8 @@ void HNASM(const string& fileName, const string& partName) {
             if (command=="WAIT") {WAIT(content);}
             else if (command=="CLEAR") {CLEAR();}
             else if (command=="PRINT") {PRINT(content);}
-            else if (command=="PLAYSOUND") {PLAYSOUND(content);}
-            // else if (command=="COMINGSOON") {}
+            else if (command=="PLAYAUDIO") {PLAYAUDIO(content);}
+            else if (command=="GETINPUT") {GETINPUT(content);}
         }
     }
 }

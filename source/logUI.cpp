@@ -3,6 +3,7 @@
 #ifdef _WIN32
 #include <windows.h>
 #endif
+#include <fstream>
 #include "logUI.h"
 #include "noobornonoob.h"
 #include "cmd.h"

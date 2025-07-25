@@ -1,5 +1,5 @@
-﻿#include "sound.h"
-#include "boot/boot.h"
+#include "audio.h"
+#include "logUI.h"
 #include "hnasm/hnasm.h"
 #ifdef _WIN32
 #include <windows.h>
@@ -31,33 +31,20 @@ int main(){
     cout << "\033]0;$title\007";
     #endif
     int chse;
-    StopSound();
-    PlaySound("AmbientDroneClipped.wav");
+    StopAudio();
+    PlayAudio("AmbientDroneClipped.wav");
     while(true) {
         #ifdef _WIN32
         system("cls");
         #else
         system("clear");
         #endif
-        cout << "\n\n\n\n\n"
-             << "               ██╗  ██╗  █████╗   █████╗  ██╗  ██╗ ███╗  ██╗ ███████╗ ████████╗\n"
-             << "               ██║  ██║ ██╔══██╗ ██╔══██╗ ██║ ██╔╝ ████╗ ██║ ██╔════╝ ╚══██╔══╝\n"
-             << "               ███████║ ███████║ ██║  ╚═╝ █████═╝  ██╔██╗██║ █████╗      ██║   \n"
-             << "               ██╔══██║ ██╔══██║ ██║  ██╗ ██╔═██╗  ██║╚████║ ██╔══╝      ██║   \n"
-             << "               ██║  ██║ ██║  ██║ ╚█████╔╝ ██║ ╚██╗ ██║ ╚███║ ███████╗    ██║   \n"
-             << "               ╚═╝  ╚═╝ ╚═╝  ╚═╝  ╚════╝  ╚═╝  ╚═╝ ╚═╝  ╚══╝ ╚══════╝    ╚═╝   \n"
-             << "                [C++ Edition by Skiawm91]\n"
-             << "\n\n\n\n\n\n\n"
-             << "                             1) Play\n"
-             << "                             2) Settings\n"
-             << "                             3) Quit Hacknet\n"
-             << "\n\n\n\n\n\n\n\n";
-            cout << "choose: ";
-        cin >> chse;
+        int chse;
+        HNASM("ui.chns", "HOME");
         switch(chse) {
             case 1:
-                Boot();
-            case 3:
+                LogUI();
+            case 4:
                 string yn;
                 #ifdef _WIN32
                 system("cls");

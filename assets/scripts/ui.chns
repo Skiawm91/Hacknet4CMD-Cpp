@@ -1,0 +1,66 @@
+BEGIN_HOME
+PRINT
+PRINT
+PRINT
+PRINT
+PRINT
+PRINT                ██╗  ██╗  █████╗   █████╗  ██╗  ██╗ ███╗  ██╗ ███████╗ ████████╗\n"
+PRINT                ██║  ██║ ██╔══██╗ ██╔══██╗ ██║ ██╔╝ ████╗ ██║ ██╔════╝ ╚══██╔══╝\n"
+PRINT                ███████║ ███████║ ██║  ╚═╝ █████═╝  ██╔██╗██║ █████╗      ██║   \n"
+PRINT                ██╔══██║ ██╔══██║ ██║  ██╗ ██╔═██╗  ██║╚████║ ██╔══╝      ██║   \n"
+PRINT                ██║  ██║ ██║  ██║ ╚█████╔╝ ██║ ╚██╗ ██║ ╚███║ ███████╗    ██║   \n"
+PRINT                ╚═╝  ╚═╝ ╚═╝  ╚═╝  ╚════╝  ╚═╝  ╚═╝ ╚═╝  ╚══╝ ╚══════╝    ╚═╝   \n"
+PRINT                                         [C++ Edition]                          \n"
+PRINT
+PRINT
+PRINT
+PRINT
+PRINT
+PRINT
+PRINT
+PRINT                              1) Play
+PRINT                              3) Mods
+PRINT                              3) Settings
+PRINT                              4) Quit
+PRINT
+PRINT
+PRINT
+PRINT
+PRINT
+PRINT
+PRINT
+GETINPUT choose:
+END_HOME
+BEGIN_LOGIN
+PRINT
+PRINT
+PRINT
+PRINT
+PRINT
+PRINT                ██╗  ██╗  █████╗   █████╗  ██╗  ██╗ ███╗  ██╗ ███████╗ ████████╗\n"
+PRINT                ██║  ██║ ██╔══██╗ ██╔══██╗ ██║ ██╔╝ ████╗ ██║ ██╔════╝ ╚══██╔══╝\n"
+PRINT                ███████║ ███████║ ██║  ╚═╝ █████═╝  ██╔██╗██║ █████╗      ██║   \n"
+PRINT                ██╔══██║ ██╔══██║ ██║  ██╗ ██╔═██╗  ██║╚████║ ██╔══╝      ██║   \n"
+PRINT                ██║  ██║ ██║  ██║ ╚█████╔╝ ██║ ╚██╗ ██║ ╚███║ ███████╗    ██║   \n"
+PRINT                ╚═╝  ╚═╝ ╚═╝  ╚═╝  ╚════╝  ╚═╝  ╚═╝ ╚═╝  ╚══╝ ╚══════╝    ╚═╝   \n"
+PRINT                                         [C++ Edition]                          \n"
+PRINT
+PRINT
+PRINT
+PRINT
+PRINT
+PRINT
+PRINT
+PRINT                              1) Login
+PRINT                              2) Register
+PRINT
+PRINT                              3) Play with Guest
+PRINT
+PRINT
+PRINT
+PRINT
+PRINT
+PRINT
+PRINT
+GETINPUT choose:
+END_LOGIN

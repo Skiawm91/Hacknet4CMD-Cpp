@@ -1,5 +1,5 @@
 #include "cmds.h"
-#include "../../sound.h"
+#include "../../audio.h"
 #include <string>
 #ifdef _WIN32
 #include <windows.h>
@@ -8,9 +8,9 @@
 #include <sstream>
 using namespace std;
 
-void PLAYSOUND(const string& content) {
+void PLAYAUDIO(const string& content) {
     string arg1;
     istringstream args(content);
     args >> arg1;
-    PlaySound(arg1);
+    PlayAudio(arg1);
 }

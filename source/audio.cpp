@@ -1,8 +1,7 @@
 // Mac sound player by GPT
-#include "sound.h"
+#include "audio.h"
 #ifdef _WIN32
 #include <windows.h>
-#undef PlaySound
 #elif __APPLE__
 #include <AudioToolbox/AudioToolbox.h>
 #include <atomic>
@@ -13,10 +12,10 @@
 using namespace std;
 
 #ifdef _WIN32
-void PlaySound(const string& soundFile) {
+void PlayAudio(const string& soundFile) {
     PlaySoundA(("assets/musics/" + soundFile).c_str(), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 }
-void StopSound() {
+void StopAudio() {
     PlaySoundA(NULL, NULL, 0);
 }
 #elif __APPLE__

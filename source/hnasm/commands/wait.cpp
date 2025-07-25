@@ -15,7 +15,7 @@ inline void Sleep(const int& ms) {usleep(ms * 1000);}
 void WAIT(const string& content) {
     string arg1, arg2;
     istringstream args(content);
-    args >> arg1 >> arg2;
+    args >> arg1, arg2;
     try {
         double seconds = stod(arg1);
         Sleep(static_cast<int>(seconds * 1000));

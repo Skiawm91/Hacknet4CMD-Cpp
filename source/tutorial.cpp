@@ -1,5 +1,5 @@
-﻿#include "tutorial.h"
-#include "sound.h"
+#include "tutorial.h"
+#include "audio.h"
 #include "cmd.h"
 #include "porthack.h"
 #ifdef _WIN32
