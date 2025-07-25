@@ -4,13 +4,16 @@
 #else
 #include <unistd.h>
 #endif
+#ifdef __APPLE__
+#include <sys/sysctl.h>
+#endif
 #include <cstdlib>
 #include <string>
 #include <iostream>
 using namespace std;
 
 #ifndef _WIN32
-void Sleep(const int& ms) {usleep(ms * 1000);}
+inline void Sleep(const int& ms) {usleep(ms * 1000);}
 #endif
 
 #ifdef _WIN32
@@ -48,7 +51,7 @@ DWORD GetRegDWORDValue(const wchar_t* name) {
     return data;
 }
 #elif __APPLE__
-string getSysctlString(const char* name) {
+inline string getSysctlString(const char* name) {
     size_t size = 0;
     sysctlbyname(name, nullptr, &size, nullptr, 0);
     char* value = new char[size];
@@ -58,7 +61,7 @@ string getSysctlString(const char* name) {
     return result;
 }
 
-int getSysctlInt(const char* name) {
+inline int getSysctlInt(const char* name) {
     int value = 0;
     size_t size = sizeof(value);
     sysctlbyname(name, &value, &size, nullptr, 0);

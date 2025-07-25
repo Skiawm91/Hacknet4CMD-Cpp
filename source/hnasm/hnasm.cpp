@@ -5,7 +5,7 @@
 #include <sstream>
 using namespace std;
 
-void HNASM(const string& fileName, const string& partName = "") {
+void HNASM(const string& fileName, const string& partName) {
     string scriptPath = "assets/scripts/" + fileName;
     ifstream file(scriptPath);
     string line;

@@ -9,7 +9,7 @@
 using namespace std;
 
 #ifndef _WIN32
-void Sleep(const int& ms) {usleep(ms * 1000);}
+inline void Sleep(const int& ms) {usleep(ms * 1000);}
 #endif
 
 void WAIT(const string& content) {

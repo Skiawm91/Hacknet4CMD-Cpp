@@ -4,10 +4,15 @@
 #ifdef _WIN32
 #include <windows.h>
 #undef PlaySound
+#elif __APPLE__
+#include <unistd.h>
+#include <libgen.h>
+#include <mach-o/dyld.h>
 #endif
 #include <iostream>
 #include <cstdlib>
 #include <string>
+#include "porthack.h"
 using namespace std;
 
 int main(){
@@ -29,7 +34,11 @@ int main(){
     StopSound();
     PlaySound("AmbientDroneClipped.wav");
     while(true) {
+        #ifdef _WIN32
         system("cls");
+        #else
+        system("clear");
+        #endif
         cout << "\n\n\n\n\n"
              << "               ██╗  ██╗  █████╗   █████╗  ██╗  ██╗ ███╗  ██╗ ███████╗ ████████╗\n"
              << "               ██║  ██║ ██╔══██╗ ██╔══██╗ ██║ ██╔╝ ████╗ ██║ ██╔════╝ ╚══██╔══╝\n"

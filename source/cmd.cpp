@@ -13,7 +13,7 @@ void Cmd() {
     #ifdef _WIN32
     system("pause > nul");
     #else
-    system("read -p")
+    system("read -p");
     #endif
     // string command;
     // cout << "hoyiqiang@hacknet~$ ";
