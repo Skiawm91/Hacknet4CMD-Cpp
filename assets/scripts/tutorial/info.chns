@@ -1,0 +1,12 @@
+BEGIN_JOHNSVR
+WAIT 1
+PRINT
+PRINT        Server info
+PRINT
+PRINT server IP:192.168.45.2
+WAIT 2
+PRINT server files:(Unknown)
+WAIT 2
+PRINT ping:103ms
+WAIT 2
+END_JOHNSVR

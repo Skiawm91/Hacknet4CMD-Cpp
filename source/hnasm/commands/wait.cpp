@@ -13,11 +13,11 @@ inline void Sleep(const int& ms) {usleep(ms * 1000);}
 #endif
 
 void WAIT(const string& content) {
-    string arg1, arg2;
+    string arg[2];
     istringstream args(content);
-    args >> arg1 >> arg2;
+    args >> arg[0] >> arg[1];
     try {
-        double seconds = stod(arg1);
+        double seconds = stod(arg[0]);
         Sleep(static_cast<int>(seconds * 1000));
     } catch (const invalid_argument) {}
 }

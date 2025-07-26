@@ -1,3 +1,7 @@
+BEGIN_RUN
+PRINT {PortHack} running...
+END_RUN
+BEGIN_HACK
 WAIT 0.2
 PRINT porsche firebird	prince	rosebud
 WAIT 0.2
@@ -97,3 +101,7 @@ PRINT
 PRINT
 PRINT Password Found!
 WAIT 3
+END_HACK
+BEGIN_DONE
+PRINT {PortHack} done!
+END_DONE

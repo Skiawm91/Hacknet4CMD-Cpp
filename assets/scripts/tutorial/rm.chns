@@ -1,0 +1,5 @@
+BEGIN_RM*
+PRINT deleting...
+WAIT 3
+PRINT done!
+END_RM*

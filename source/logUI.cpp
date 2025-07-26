@@ -1,53 +1,97 @@
+#include "logUI.h"
+#include "hnasm/hnasm.h"
+#include "crypto/crypto.h"
+#include "boot/boot.h"
+#include "cmd.h"
 #include <iostream>
 #include <string>
 #ifdef _WIN32
 #include <windows.h>
 #endif
 #include <fstream>
-#include "logUI.h"
-#include "noobornonoob.h"
-#include "cmd.h"
+#include <filesystem>
+#include <sstream>
+#include <algorithm>
 using namespace std;
 
+string name;
+
 void LogUI() {
-    string name;
-    string pwd;
+    extern string input;
+    extern string shatext;
+    int chse = 0;
+    string shapwd, tgshapwd;
     while(true) {
-        #ifdef _WIN32
-        system("cls");
-        #else
-        system("clear");
-        #endif
-        cout << "Please login a user. If have no any user, login \"guest\"" << endl;
-        cout << "Login: ";
-        cin >> name;
-        if (name=="hoyiqiang") {
-            cout << "Password: ";
-            cin >> pwd;
-            if (pwd=="hoyiqiang1006") {
-                #ifdef _WIN32
-                MessageBoxA(
-                    NULL,
-                    "Login success!\n    Welcome!",
-                    "Hacknet LogUI",
-                    MB_ICONINFORMATION | MB_OK
-                );
-                #endif
-                Cmd();
+        HNASM("ui.chns", "LOGO");
+        HNASM("ui.chns", "USER");
+        try {chse = stoi(input);} catch (const invalid_argument) {chse = 0;}
+        switch(chse) {
+            case 1:
+                HNASM("logUI/login.chns", "NAME");
+                transform(input.begin(), input.end(), input.begin(), ::tolower);
+                name = input;
+                {
+                    ifstream file("config/" + name + "/pw.hnud");
+                    if (!file) {HNASM("logUI/login.chns", "ERROR");}
+                    else {
+                        string line;
+                        getline(file, line);
+                        istringstream iss(line);
+                        iss >> tgshapwd;
+                        HNASM("logUI/login.chns", "PASSWD");
+                        SHA256Encrypt(input);
+                        shapwd = shatext;
+                        if (shapwd == tgshapwd) {
+                            Boot();
+                            return;
+                        } else {
+                            HNASM("logUI/login.chns", "ERROR");
+                        }
+                    }
+                }
+                break;
+            case 2:
+                HNASM("logUI/register.chns", "NAME");
+                transform(input.begin(), input.end(), input.begin(), ::tolower);
+                name = input;
+                {
+                    while(true) {
+                        if (filesystem::exists("config/" + name) && filesystem::is_directory("config" + name)) {
+                            HNASM("logUI/register.chns", "USEDNAME");
+                        } else {
+                            if (!filesystem::exists("config")) {
+                                filesystem::create_directory("config");
+                            }
+                            filesystem::create_directory("config/" + name);
+                            string pwd[2];
+                            HNASM("logUI/register.chns", "PASSWD");
+                            pwd[0] = input;
+                            HNASM("logUI/register.chns", "CONFIRM");
+                            pwd[1] = input;
+                            if (pwd[0] == pwd[1]) {
+                                SHA256Encrypt(pwd[1]);
+                                shapwd = shatext;
+                                ofstream file("config/" + name + "/pw.hnud");
+                                if (file.is_open()) {
+                                    file << shapwd << endl;
+                                    file.close();
+                                }
+                                HNASM("logUI/register.chns", "SUCCESS");
+                                break;
+                            } else {
+                                HNASM("logUI/register.chns", "INVCONFIRM");
+                            }
+                        }
+                    }
+                }
+                break;
+            case 3:
+                Boot();
                 return;
-            } else {
-                #ifdef _WIN32
-                MessageBoxA(
-                    NULL,
-                    "Password Invalid!\nPlease try again!",
-                    "Hacknet LogUI",
-                    MB_ICONERROR | MB_OK
-                );
-                #endif
-            }
-        } else if (name=="guest") {
-            Noobornonoob();
-            return;
+            case 4:
+                return;
+            default:
+                break;
         }
     }
 }

@@ -1,0 +1,14 @@
+BEGIN_1
+PRINT 以下是目前在區網上找的到的電腦or伺服器
+PRINT 1. Jhon's Server (192.168.45.2)
+PRINT 2. Hoyiqiang's NAS (192.168.31.4)
+PRINT
+END_1
+BEGIN_2
+PRINT 以下是目前在區網上找的到的電腦or伺服器
+PRINT 1. Jhon's Server (192.168.45.2)
+PRINT 2. Hoyiqiang's NAS (192.168.31.4)
+PRINT 3. huirohbuhrupieahiui (666.666.666.666)
+PRINT
+WAIT 2
+END_2

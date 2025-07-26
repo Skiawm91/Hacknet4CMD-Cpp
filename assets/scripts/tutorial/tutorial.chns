@@ -1,3 +1,9 @@
+BEGIN_CHANGESONG
+CLEAR
+PLAYAUDIO tutorial.wav
+WAIT 1
+END_CHANGESONG
+
 BEGIN_TUTORIAL1
 CLEAR
 PRINT
@@ -7,7 +13,7 @@ PRINT 你現在處於危險之中!
 PRINT 請用最快的速度完成教學!
 PRINT 如果準備好了請輸入y 要跳過教學請輸入skip
 PRINT
-GETINPUT choose:
+GETINPUT choose: 
 END_TUTORIAL1
 BEGIN_TUTORIAL2
 CLEAR
@@ -18,5 +24,5 @@ PRINT 入侵他人終端裝置將會違反中華民國刑法第358條
 PRINT 從現在開始 為自己的行為負責吧!
 PRINT 如果準備好了請輸入y繼續
 PRINT
-GETINPUT choose:
+GETINPUT choose: 
 END_TUTORIAL2

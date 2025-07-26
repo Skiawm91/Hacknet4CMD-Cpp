@@ -46,9 +46,11 @@ static void AQOC(void* inUserData, AudioQueueRef inAQ, AudioQueueBufferRef inBuf
     OSStatus status = ExtAudioFileRead(ctx->audioFile, &numPackets, &bufferList);
     if (status != noErr || numPackets == 0) {
         ExtAudioFileSeek(ctx->audioFile, 0);
+        numPackets = ctx->numPacketsToRead;
         status = ExtAudioFileRead(ctx->audioFile, &numPackets, &bufferList);
-        if (status != noErr) {
-            keepPlaying = false;
+        if (status != noErr || numPackets == 0) {
+            inBuffer->mAudioDataByteSize = 0;
+            AudioQueueEnqueueBuffer(inAQ, inBuffer, 0, nullptr);
             return;
         }
     }

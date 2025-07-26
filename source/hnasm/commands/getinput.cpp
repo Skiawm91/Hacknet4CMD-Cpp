@@ -7,6 +7,7 @@ using namespace std;
 string input;
 
 void GETINPUT(const string& content) {
+    extern string input;
     cout << content;
     getline(cin, input);
 }

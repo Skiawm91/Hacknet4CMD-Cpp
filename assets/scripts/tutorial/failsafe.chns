@@ -1,4 +1,5 @@
 BEGIN_FAILSAFE
+CLEAR
 WAIT 2
 PRINT -----正在初始化FailSafe模式-----
 PRINT

@@ -29,40 +29,41 @@ int main(){
         char* dir = dirname(path_copy);
         chdir(dir);
     }
-    cout << "\033]0;$Hacknet\007";
+    cout << "\033]0;Hacknet\007";
     #endif
     int chse;
-    extern string input; // from "hnasm/commands/getinput.cpp"
+    extern string input;
     StopAudio();
     PlayAudio("AmbientDroneClipped.wav");
     while(true) {
-        #ifdef _WIN32
-        system("cls");
-        #else
-        system("clear");
-        #endif
+        HNASM("ui.chns", "LOGO");
         HNASM("ui.chns", "HOME");
         try {chse = stoi(input);} catch (invalid_argument) {chse = 0;}
         switch(chse) {
             case 1:
-                Boot();
+                LogUI();
+                break;
             case 4:
-                string yn;
-                #ifdef _WIN32
-                system("cls");
-                #elif __APPLE__
-                system("clear");
-                #endif
-                while(true) {
-                    cout << "Are you sure to quit Hacknet? (y/n)\n";
-                    cout << "choose: ";
-                    cin >> yn;
-                    if (yn=="y") {
-                        return 0;
-                    } else if (yn=="n") {
-                        break;
+                {
+                    string yn;
+                    #ifdef _WIN32
+                    system("cls");
+                    #elif __APPLE__
+                    system("clear");
+                    #endif
+                    while(true) {
+                        cout << "Are you sure to quit Hacknet? (y/n)\n";
+                        cout << "choose: ";
+                        cin >> yn;
+                        if (yn=="y") {
+                            return 0;
+                        } else if (yn=="n") {
+                            break;
+                        }
                     }
                 }
+            default:
+                break;
         }
     }
     return 0;

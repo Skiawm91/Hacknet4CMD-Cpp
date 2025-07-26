@@ -1,3 +1,8 @@
+#include "boot.h"
+#include "../hnasm/hnasm.h"
+#include "informations/infos.h"
+#include "utilities/utils.h"
+#include "../noobornonoob.h"
 #include <iostream>
 #include <string>
 #ifdef _WIN32
@@ -5,10 +10,6 @@
 #else
 #include <unistd.h>
 #endif
-#include "boot.h"
-#include "informations/infos.h"
-#include "utilities/utils.h"
-#include "../logUI.h"
 using namespace std;
 
 #ifndef _WIN32
@@ -16,6 +17,8 @@ inline void Sleep(const int& ms) {usleep(ms * 1000);}
 #endif
 
 void Boot() {
+    HNASM("ui.chns", "LOGO");
+    HNASM("ui.chns", "NULL");
     srand(static_cast<unsigned int>(time(nullptr)));
     string block = "=";
     string loading = "";
@@ -27,7 +30,7 @@ void Boot() {
     }
     #ifdef _WIN32
     system("cls");
-    #elif __APPLE__
+    #else
     system("clear");
     #endif
     cout << "Loading BIOS..." << endl;
@@ -50,6 +53,6 @@ void Boot() {
     cout << "\n\n";
     cout << "Booting complete." << endl;
     Sleep(3000);
-    LogUI();
+    Noobornonoob();
     return;
 }
